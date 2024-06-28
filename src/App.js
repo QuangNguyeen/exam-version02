@@ -18,15 +18,22 @@ function App() {
     const handleDelete = (id) => {
         setStudents(students.filter(student => student.id !== id));
     }
-    const handleSave = (student) => {
-        if (student.id) {
-            setStudents(students.map(emp => emp.id === student.id ? student : emp));
-        } else {
-            student.id = student.length + 1;
-            setStudents([...students, student]);
+    const handleAdd = (student) => {
+        const newStudent = {
+            id: students.length + 1,
+            name: student.name,
+            date: student.date,
+            position: student.position,
+            status: student.status,
         }
+        setStudents([...students, newStudent]);
         setShowForm(false);
+        setSelectedStudent(null);
     };
+    const handleFormClose = () => {
+        setShowForm(false);
+        setSelectedStudent(null);
+    }
   return (
       <div className="container mt-5" >
           <nav className="navbar navbar-expand-lg navbar-light fw-bold " style={{backgroundColor:"#0077b6"}}>
@@ -66,8 +73,8 @@ function App() {
           </div>
           <StudentForm
               show={showForm}
-              handleClose={() => setShowForm(false)}
-              handleSave={handleSave}
+              handleClose={handleFormClose}
+              handleSave={handleAdd}
               student={selectedStudent}
           />
           <div className="d-flex justify-content-between mt-3">

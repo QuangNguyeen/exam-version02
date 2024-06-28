@@ -24,11 +24,11 @@ function StudentList({students, onEdit, onDelete}) {
                         <td>{student.position}</td>
                         <td>{student.status}</td>
                         <td>
-                            <Button onClick={() => onEdit(student)} className="me-2">
-                                <FaCog></FaCog>
+                            <Button onClick={() => onEdit(student)} style={{marginRight:"1rem"}}>
+                                <FaCog />
                             </Button>
-                            <Button onClick={() => onDelete(student.id)} className="me-2">
-                                <FaTimes></FaTimes>
+                            <Button onClick={() => onDelete(student.id)}>
+                                <FaTimes />
                             </Button>
                         </td>
                     </tr>

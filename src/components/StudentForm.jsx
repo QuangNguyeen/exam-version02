@@ -1,8 +1,9 @@
 import React from 'react';
 import {useState, useEffect} from 'react'
 import {Modal, Button, Form, FormControl, FormGroup, FormLabel, FormSelect} from 'react-bootstrap';
-function StudentForm({show, handleClose, handleSave, student}) {
+const StudentForm = ({show, handleClose, handleSave, student}) => {
     const [form, setForm] = useState({id:'', name:'', date:'', position:'', status:''});
+    const [inputValue, setInputValue] = useState('');
     const [error, setError] = useState('');
     useEffect(() =>{
         if(student){
@@ -14,21 +15,18 @@ function StudentForm({show, handleClose, handleSave, student}) {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-
-        if (name === 'name') {
-            if (value.length > 50) {
-                setError('Không được quá 50 ký tự.');
-                return;
-            }
+         if(name === 'name' && value.length > 50){
+            setError("Khong nhap qua 50 ki tu");
+        } else{
+            setError('');
         }
-        setError('');
-
         setForm({ ...form, [name]: value });
     };
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (error) return;
-        handleSave(form);
+        if(!error){
+            handleSave(form);
+        }
     }
     return (
         <Modal show={show} onHide={handleClose}>
